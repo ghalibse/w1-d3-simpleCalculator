@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void type3(View view) {
-        Log.d(TAG,"type3:");
+        Log.d(TAG,"type3:" );
     }
 
     public void add(View view) {
