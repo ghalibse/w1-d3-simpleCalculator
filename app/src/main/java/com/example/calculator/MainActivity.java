@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import java.util.Stack;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final  String TAG = "MainActivityTAG_";
@@ -39,25 +41,67 @@ public class MainActivity extends AppCompatActivity {
 
     public void type1(View view) {
         Log.d(TAG,"type1:");
+        String tmp = mEditText.getText().toString();
+        mEditText.setText(tmp + "1");
     }
 
     public void type2(View view) {
         Log.d(TAG,"type2:" );
+        String tmp = mEditText.getText().toString();
+        mEditText.setText(tmp + "2");
     }
 
     public void type3(View view) {
         Log.d(TAG,"type3:" );
+        String tmp = mEditText.getText().toString();
+        mEditText.setText(tmp + "3");
     }
 
     public void add(View view) {
         Log.d(TAG,"ADD:");
+        String tmp = mEditText.getText().toString();
+        mEditText.setText(tmp + "+");
     }
 
     public void sub(View view) {
         Log.d(TAG,"SUB:");
+        String tmp = mEditText.getText().toString();
+        mEditText.setText(tmp + "-");
     }
 
     public void eq(View view) {
         Log.d(TAG,"EQU:");
+        String tmp = mEditText.getText().toString();
+
+        char ch =  calc(tmp);
+
+        mEditText.setText(tmp + "="+ ch);
     }
+    public char calc(String str) {
+
+        StringBuilder s = new StringBuilder(str);
+        s.reverse();
+        //s.deleteCharAt(0);
+
+        Stack st = new Stack();
+        char [] strArry = s.toString().toCharArray();
+
+        for( char i : strArry) st.push(i);
+
+        int ans = 0;
+        while(st.size() != 1){
+
+            int a = (char)st.pop() - '0';
+            char sn = (char)st.pop();
+            int b = (char) st.pop() - '0';
+
+            switch(sn){
+                case '+' : ans =  a + b; break;
+                case '-' : ans =  a - b; break;
+            }
+            st.push((char)(ans + '0'));
+        }
+        return (char) st.pop();
+    }
+
 }
